@@ -1,13 +1,12 @@
 install node
 check node version: node -v
 
-install typescript globally: npm i typescript -g
+install typescript globally: npm i typescript
 
-transpile .ts file to .js file: tsc <folder-name>/<file-name.js>
+transpile .ts file to .js file: tsc <folder-name>/<file-name.ts> or `npx tsc <file-name.ts>`
+you cant run .ts file like .js: node <folder-name>/<file-name.js> // not working use below step
 
-you cant run .ts file like .js: node<folder-name>/<file-name.js> // error
-
-run .ts code directly::
+// run .ts code directly::
 
 # 1. Remove the broken global versions
 npm uninstall -g ts-node typescript
@@ -20,3 +19,14 @@ npm install -D typescript@5 ts-node @types/node // version 5
 npx tsc --init
 # 5. Run your file
 npx ts-node ts/index.ts
+
+// make file.ts into dist folder
+in tsconfig.json file -> update to
+    "rootDir": "./ts", // using npx tsc check directly in /ts folder
+    "outDir": "./dist", // .js output goes into this folder
+
+// stops transpile to .js if .js has error:
+    "noEmitOnError": true
+
+
+// Debugging
